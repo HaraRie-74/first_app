@@ -1,0 +1,17 @@
+<%= form_with model: @customer,url:customers_path,method: :post do |f| %>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+  <%= f.label :body %>
+  <%= f.text_area :body %>
+  <%= f.label :profiles %>
+  <%= f.file_field :profiles,multiple: true,accept:"image/*" %>
+  <%= f.submit "投稿" %>
+<% end %>
+
+<% @customers.each do |customer| %>
+  <%= link_to customer.title,customer_path(customer.id) %>
+  <%= customer.body %>
+  <% customer.profiles.each do |profile| %>
+      <%= image_tag profile.variant(resize_to_limit: [100, 100]) %>
+  <% end %></br >
+<% end %>
